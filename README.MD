@@ -7,10 +7,9 @@
 
 - [x] Interface de login (frontend)
 - [ ] Validação de login com backend
-- [ ] Cadastro de novos usuários
 - [ ] Tela inicial com dashboard
-- [ ] Cadastro de pacientes
-- [ ] Visualização e edição de prontuários
+- [x] Cadastro de pacientes
+- [x] Visualização e edição de prontuários
 - [ ] Histórico de consultas
 - [ ] Backup e exportação de dados
 - [ ] Sistema de permissões por nível de usuário (psicólogo/admin)
@@ -37,8 +36,8 @@ A tela de login está implementada com `Tkinter` e possui um layout dividido em 
 | Funcionalidade de login (backend)    | 🔲 Pendente |
 | Tela de cadastro                     | 🔲 Pendente |
 | Tela principal (dashboard)           | 🔲 Pendente |
-| Cadastro de pacientes                | 🔲 Pendente |
-| Armazenamento dos dados (SQLite)     | 🔲 Pendente |
+| Cadastro de pacientes                | ✅ Feito    |
+| Armazenamento dos dados (SQLite)     | ✅ Feito    |
 | Exportação/backup de prontuários     | 🔲 Pendente |
 
 ## 🤝 Contribuição
