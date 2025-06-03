@@ -1,5 +1,7 @@
 from pathlib import Path
 from tkinter import Tk, Canvas, Entry, Button, PhotoImage, Label
+from dotenv import load_dotenv
+import os
 
 WIDTH = 862
 HEIGHT = 519
@@ -8,6 +10,12 @@ ASSETS_PATH = Path(__file__).parent / "assets" / "frame0"
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
+
+load_dotenv()
+
+# Acessa as variáveis
+login = os.getenv("LOGIN")
+senha = os.getenv("SENHA")
 
 class PsicoDataApp:
     def __init__(self, root):
@@ -108,10 +116,13 @@ class PsicoDataApp:
 
         if not email or not password:
             self.show_message("Preencha todos os campos!")
+        elif login == email and senha == password:
+                self.show_message("")
+                print(f"Login bem-sucedido com o e-mail: {email}")
+            # Aqui você pode adicionar verificação real de login ou mudar de tela
         else:
             self.show_message("")
-            print(f"Login bem-sucedido com o e-mail: {email}")
-            # Aqui você pode adicionar verificação real de login ou mudar de tela
+            print(f"Senha Incorreta")
 
     def show_message(self, msg):
         self.message_label.config(text=msg)
