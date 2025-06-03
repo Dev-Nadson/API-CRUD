@@ -29,7 +29,6 @@ def main():
         4: remove_patient
     }
     while True:
-        os.system('cls')
         print("----- Gerenciamento de Pacientes -----\n")
         print("1. Criar novo paciente")
         print("2. Ler o prontuário")
@@ -37,9 +36,10 @@ def main():
         print("4. Excluir algum paciente")
         print("5. Sair\n")
 
-        option = Option_INT("Selecione uma opção ")
+        option = Option_INT("Selecione uma opção: ")
         if option == 5:
             break
         main_menu.get(option, invalid_option)()
 
+os.system('cls')
 main()
