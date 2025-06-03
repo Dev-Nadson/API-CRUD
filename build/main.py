@@ -1,5 +1,6 @@
 import os
-from CRUD import *
+from server.crud import *
+from gui import *
 
 def Option_INT(prompt: str) -> int:
     while True:
@@ -42,4 +43,7 @@ def main():
         main_menu.get(option, invalid_option)()
 
 os.system('cls')
+window = Tk()
+app = PsicoDataApp(window)
+window.mainloop()
 main()

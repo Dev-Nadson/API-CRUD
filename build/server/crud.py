@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine, Column, String, Integer, Boolean, ForeignKey
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-engine = create_engine("sqlite:///Backend/PsyApp.db")
+engine = create_engine("sqlite:///build/database/psyapp.db")
 SessionLocal = sessionmaker(bind=engine)
 session = SessionLocal()
 Base = declarative_base()
