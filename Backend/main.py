@@ -10,11 +10,11 @@ def Option_INT(prompt: str) -> int:
 
 def create_menu():
     while True:
-        print("\n----- Create Patients -----")
-        print("1. Create patient")
-        print("2. Back to main menu\n")
+        print("\n----- Criação de Pacientes -----")
+        print("1. Criar paciente")
+        print("2. Sair\n")
 
-        option = Option_INT("Select an option: ")
+        option = Option_INT("Selecione uma opção: ")
         match option:
             case 1:
                 create_patient()
