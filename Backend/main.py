@@ -2,7 +2,7 @@ import os
 from sqlalchemy import create_engine, Column, String, Integer, Boolean, ForeignKey
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-DataBase = create_engine("sqlite:///PsyApp.bd")
+DataBase = create_engine("sqlite:///Backend/PsyApp.bd")
 Session = sessionmaker(bind=DataBase)
 session = Session()
 
@@ -64,44 +64,6 @@ class Sessao(base):
 base.metadata.create_all(bind=DataBase)
 
 def create():
-    def createPaciente():
-        #Dados do Paciente
-        name = input("Insira o nome do paciente: ")
-        age = (input("Insira a idade do Paciente: "))
-        civil_status = input("Estado cívil do paciente: ")
-        profession = input("Insira a profissão do paciente: ")
-        birthday = input("Insira a data de nascimento do paciente: ")
-        gender = input("Insira o gênero do paciente: ")
-        cpf = (input("Insira o CPF do paciente (Apenas Números): "))
-        rg = (input("Insira o RG do paciente (Apenas Números): "))
-        adress = input("Insira o endereço do paciente: ")
-        contact = (input("Insira o telefone para contato do paciente (Apenas Números): "))
-        paciente = Paciente(name, age, civil_status, profession, birthday, gender, cpf, rg, adress, contact)
-        session.add(paciente)
-        session.commit()
-
-        def createSession():
-            #Dados da sessão
-            paciente_id = paciente.id #obj paciente, atributo id
-            date = input("Insira a data do atendimento: ")
-            hour = input("Insira o horário da sessão: ")
-            duration = input("Queixa principal: ")
-            queixa_principal = input("Queixa principal: ")
-            historico_familiar = input("Histórico Familiar: ")
-            historico_pessoal = input("Histórico Pessoal: ")
-            aspectos = input("Aspectos emocionais e comportamentais: ")
-            obs = input("Observações: ")
-            sessao = Sessao(paciente_id, date, hour, duration, queixa_principal, historico_familiar, historico_pessoal, aspectos, obs)
-            session.add(sessao)
-            session.commit()
-
-
-        print("\n----- Criação de Sessões -----")
-        print("\n1.Criar primeira sessão\n2.Sair\n")
-        option = int(input("Selecione a opção desejada: "))
-        if option == 1:
-            createSession()
-
     MenuCreate = {1: createPaciente}
     while True:
         print("\n----- Criação de Pacientes -----")
@@ -110,6 +72,41 @@ def create():
         if option == 2:
             break
         MenuCreate.get(option, invalid)()
+
+def createPaciente():
+    name = input("Insira o nome do paciente: ")
+    age = (input("Insira a idade do Paciente: "))
+    civil_status = input("Estado cívil do paciente: ")
+    profession = input("Insira a profissão do paciente: ")
+    birthday = input("Insira a data de nascimento do paciente: ")
+    gender = input("Insira o gênero do paciente: ")
+    cpf = (input("Insira o CPF do paciente (Apenas Números): "))
+    rg = (input("Insira o RG do paciente (Apenas Números): "))
+    adress = input("Insira o endereço do paciente: ")
+    contact = (input("Insira o telefone para contato do paciente (Apenas Números): "))
+    paciente = Paciente(name, age, civil_status, profession, birthday, gender, cpf, rg, adress, contact)
+    session.add(paciente)
+    session.commit()
+    print("\n----- Criação de Sessões -----")
+    print("\n1.Criar primeira sessão\n2.Sair\n")
+    option = int(input("Selecione a opção desejada: "))
+    if option == 1:
+        IDpaciente = paciente.id #obj paciente, atributo id
+        createSession(IDpaciente)
+
+def createSession(IDpaciente):
+    paciente_id = IDpaciente #obj paciente, atributo id
+    date = input("Insira a data do atendimento: ")
+    hour = input("Insira o horário da sessão: ")
+    duration = input("Duração da sessão: ")
+    queixa_principal = input("Queixa principal: ")
+    historico_familiar = input("Histórico Familiar: ")
+    historico_pessoal = input("Histórico Pessoal: ")
+    aspectos = input("Aspectos emocionais e comportamentais: ")
+    obs = input("Observações: ")
+    sessao = Sessao(paciente_id, date, hour, duration, queixa_principal, historico_familiar, historico_pessoal, aspectos, obs)
+    session.add(sessao)
+    session.commit()
         
 def read():
     # Quero primeiro listar todos os pacientes por id e nome e depois poder selecionar um único paciente e mostrar todos seus dados
@@ -120,10 +117,18 @@ def read():
     # Info_Paciente = input("Digite o ID do paciente para mais informações: ") #Adicionar função Ler mais
 
 def update():
-    # name = input("Insira o nome do paciente: ")
-    # queixa_principal = input("\nDigite o conteúdo da Alteração: \n")
-    pass
+    pacientes = session.query(Paciente).all()
+    for paciente in pacientes:
+        print(f"ID: {paciente.id}, Nome: {paciente.name}")
 
+    print("\n----- Gerenciador de Sessões -----")
+    print("\n1.Adicionar sessão\n2.Sair\n")
+    option = int(input("Selecione a opção desejada: "))
+    if option == 1:
+        IDpaciente = paciente.id #obj paciente, atributo 'id'
+        createSession(IDpaciente)
+
+    
 def remove():
     # name = input("Insira o nome do paciente: ")
     pass
