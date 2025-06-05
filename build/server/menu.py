@@ -1,5 +1,5 @@
 import os
-from server.crud import * #Não funciona nesse arquivo, mas funciona na main
+from crud import *
 
 def Option_INT(prompt: str) -> int:
     while True:
